@@ -1,0 +1,58 @@
+{% load static %}
+<html>
+<head>
+  <title>Listado de Categorias</title>
+  <!--archivos CSS-->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <!--Nav-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Menú</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Categorías <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'producto:listar' %}">Productos</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--nav-->
+    <br>
+    <h3>Categorías</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Descripción</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+            {% for categoria in object_list %}
+              <tr>
+                <td>{{ categoria.id }}</td>
+                <td>{{ categoria.descripcion }}</td>
+                <td>
+                  <a href="{% url "categoria:editar" categoria.id %}" class="btn btn-primary">Editar</a>
+                  <a href="{% url "categoria:eliminar" categoria.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+              </tr>
+            {% endfor %}
+      </tbody>
+    </table>
+    <a href="{% url "categoria:crear" %}" class="btn btn-primary">Crear Categoría</a>
+  </div>
+  <!--archivos JS-->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>
